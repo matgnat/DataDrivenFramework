@@ -28,7 +28,8 @@ public class TestBase {
             String genericDir = System.getProperty("user.dir");
 
             try {
-                FileInputStream fileInputStream = new FileInputStream(genericDir + "//src//test//resources//properties//Config.properties");
+                fileInputStream = new FileInputStream("/Users/wir03/Documents/java_project/DataDrivenFramework/src/test/resources/properties/Config.properties");
+                //fileInputStream = new FileInputStream(genericDir + "/src/test/resources/properties/Config.properties");
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
             }
@@ -40,7 +41,7 @@ public class TestBase {
             }
 
             try {
-                fileInputStream = new FileInputStream(genericDir + "//src//test//resources//properties//Locators.properties");
+                fileInputStream = new FileInputStream("/Users/wir03/Documents/java_project/DataDrivenFramework/src/test/resources/properties/Locators.properties");
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
             }
@@ -54,18 +55,18 @@ public class TestBase {
 
             if (confing.getProperty("browser").equals("chrome")) {
 
-                System.getProperty("webdriver.chrome.driver", genericDir + "//src//test//resources//executables//chromedriver");
+                System.getProperty("webdriver.chrome.driver", "/Users/wir03/Documents/java_project/DataDrivenFramework/src/test/resources/executables/chromedriver.exe");
                 driver = new ChromeDriver();
 
             } else if (confing.getProperty("browser").equals("ie")){
 
-                System.getProperty("webdriver.ie.driver", genericDir + "//src//test//resources//executables//IEDriverServer.exe");
+                System.getProperty("webdriver.ie.driver", genericDir + "/src/test/resources/executables/IEDriverServer.exe");
                 driver = new InternetExplorerDriver();
 
             } else if (confing.getProperty("browser").equals("firefox")) {
 
                 //if working on early release of driver use below line
-                System.getProperty("webrdiver.gecko.driver", genericDir + "//src//test//resources//executables//geckodriver");
+                System.getProperty("webdriver.gecko.driver", genericDir + "/src/test/resources/executables/geckodriver.exe");
                 driver = new FirefoxDriver();
             }
 
