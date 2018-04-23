@@ -16,7 +16,7 @@ public class TestProperties {
 
         String genericDir = System.getProperty("user.dir");
 
-        System.out.printf(genericDir +  "//src//test//resources//properties//Config.properties");
+        System.out.printf(genericDir +  "\\src\\test\\resources\\properties\\Config.properties");
 
         FileInputStream fileInputStream = new FileInputStream(genericDir + "//src//test//resources//properties//Config.properties");
 
