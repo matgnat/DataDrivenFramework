@@ -6,6 +6,7 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
+import org.testng.annotations.BeforeTest;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -15,33 +16,44 @@ import java.util.concurrent.TimeUnit;
 
 public class TestBase {
 
-    public static Properties confing = new Properties();
+    /*
+    * webdriver - done
+    * properties - done
+    * logs - log4j jar,
+    * extend report -
+    * DB -
+    * excel -
+    * mail -
+    * reportNG, extend report -
+    * jenkins -
+    * */
+
+    public static Properties config = new Properties();
     public static Properties locators = new Properties();
     public static FileInputStream fileInputStream;
     public static WebDriver driver;
 
+
     @BeforeSuite
     public void setUp() {
+        String genericDir = System.getProperty("user.dir");
 
         if (driver == null) {
-
-            String genericDir = System.getProperty("user.dir");
-
             try {
-                fileInputStream = new FileInputStream("/Users/wir03/Documents/java_project/DataDrivenFramework/src/test/resources/properties/Config.properties");
-                //fileInputStream = new FileInputStream(genericDir + "/src/test/resources/properties/Config.properties");
+                fileInputStream = new FileInputStream(genericDir + "\\src\\test\\resources\\properties\\Config.properties");
+                System.out.println(fileInputStream);
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
             }
 
             try {
-                confing.load(fileInputStream);
+                config.load(fileInputStream);
             } catch (IOException e) {
                 e.printStackTrace();
             }
 
             try {
-                fileInputStream = new FileInputStream("/Users/wir03/Documents/java_project/DataDrivenFramework/src/test/resources/properties/Locators.properties");
+                fileInputStream = new FileInputStream(genericDir + "\\src\\test\\resources\\properties\\Locators.properties");
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
             }
@@ -53,26 +65,29 @@ public class TestBase {
             }
 
 
-            if (confing.getProperty("browser").equals("chrome")) {
+            if (config.getProperty("browser").equals("firefox")) {
 
-                System.getProperty("webdriver.chrome.driver", "/Users/wir03/Documents/java_project/DataDrivenFramework/src/test/resources/executables/chromedriver.exe");
+                System.setProperty("webdriver.gecko.driver", "geckodriver.exe");
+                driver = new FirefoxDriver();
+
+            } else if (config.getProperty("browser").equals("chrome")) {
+
+                System.setProperty("webdriver.chrome.driver",
+                        genericDir + "\\src\\test\\resources\\executables\\chromedriver.exe");
                 driver = new ChromeDriver();
+            } else if (config.getProperty("browser").equals("ie")) {
 
-            } else if (confing.getProperty("browser").equals("ie")){
-
-                System.getProperty("webdriver.ie.driver", genericDir + "/src/test/resources/executables/IEDriverServer.exe");
+                System.setProperty("webdriver.ie.driver",
+                        genericDir + "\\src\\test\\resources\\executables\\IEDriverServer.exe");
                 driver = new InternetExplorerDriver();
 
-            } else if (confing.getProperty("browser").equals("firefox")) {
-
-                //if working on early release of driver use below line
-                System.getProperty("webdriver.gecko.driver", genericDir + "/src/test/resources/executables/geckodriver.exe");
-                driver = new FirefoxDriver();
             }
 
-            driver.get(confing.getProperty("urlsite"));
+            driver.get(config.getProperty("urlsite"));
             driver.manage().window().maximize();
-            driver.manage().timeouts().implicitlyWait(Integer.parseInt(confing.getProperty("implicit.wait")), TimeUnit.SECONDS);
+            driver.manage().timeouts().implicitlyWait(Integer.parseInt(config.getProperty("implicit.wait")), TimeUnit.SECONDS);
+
+
         }
 
     }
