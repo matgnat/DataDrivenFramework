@@ -16,6 +16,18 @@ import java.util.concurrent.TimeUnit;
 
 public class TestBase {
 
+    /*
+    * webdriver - done
+    * properties - done
+    * logs - log4j jar,
+    * extend report -
+    * DB -
+    * excel -
+    * mail -
+    * reportNG, extend report -
+    * jenkins -
+    * */
+
     public static Properties config = new Properties();
     public static Properties locators = new Properties();
     public static FileInputStream fileInputStream;
@@ -74,6 +86,8 @@ public class TestBase {
             driver.get(config.getProperty("urlsite"));
             driver.manage().window().maximize();
             driver.manage().timeouts().implicitlyWait(Integer.parseInt(config.getProperty("implicit.wait")), TimeUnit.SECONDS);
+
+
         }
 
     }
