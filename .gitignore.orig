@@ -1,0 +1,10 @@
+# Created by .ignore support plugin (hsz.mobi)
+<<<<<<< HEAD
+.idea
+src/test/resources/executables
+target
+
+=======
+.idea/
+target/
+>>>>>>> win10
