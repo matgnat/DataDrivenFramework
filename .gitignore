@@ -1,5 +1,10 @@
 # Created by .ignore support plugin (hsz.mobi)
 .idea/
 target/
-src/test/resources/executables/
+src/test/resources/executables
 
+
+.gitignore
+src/test/resources/executables/chromedriver.exe
+src/test/resources/executables/geckodriver.exe
+src/test/resources/runner/
