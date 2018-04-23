@@ -1,5 +1,3 @@
 # Created by .ignore support plugin (hsz.mobi)
-.idea
-src/test/resources/executables
-target
-
+.idea/
+target/
