@@ -1,0 +1,7 @@
+24/04/2018 12:03:50 appLogger Config file loaded
+24/04/2018 12:03:50 appLogger Locators file loaded
+24/04/2018 12:03:53 appLogger Initialize Chrome driver
+24/04/2018 12:03:53 appLogger Open browser
+24/04/2018 12:03:58 appLogger Navigate to http://www.way2automation.com/angularjs-protractor/banking/#/login
+24/04/2018 12:03:59 appLogger Start login test
+24/04/2018 12:04:01 appLogger test execution completed
