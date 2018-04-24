@@ -1,5 +1,6 @@
 package base;
 
+import org.apache.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
@@ -19,7 +20,7 @@ public class TestBase {
     /*
     * webdriver - done
     * properties - done
-    * logs - log4j jar,
+    * logs - log4j jar, - logger class
     * extend report -
     * DB -
     * excel -
@@ -32,6 +33,7 @@ public class TestBase {
     public static Properties locators = new Properties();
     public static FileInputStream fileInputStream;
     public static WebDriver driver;
+    public static Logger log = Logger.getLogger("appLogger");
 
 
     @BeforeSuite
@@ -48,6 +50,7 @@ public class TestBase {
 
             try {
                 config.load(fileInputStream);
+                log.debug("Config file loaded");
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -60,6 +63,7 @@ public class TestBase {
 
             try {
                 locators.load(fileInputStream);
+                log.debug("Locators file loaded");
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -69,21 +73,23 @@ public class TestBase {
 
                 System.setProperty("webdriver.gecko.driver", "geckodriver.exe");
                 driver = new FirefoxDriver();
-
+                log.debug("Initialize Firefox driver");
             } else if (config.getProperty("browser").equals("chrome")) {
 
                 System.setProperty("webdriver.chrome.driver",
                         genericDir + "\\src\\test\\resources\\executables\\chromedriver.exe");
                 driver = new ChromeDriver();
+                log.debug("Initialize Chrome driver");
             } else if (config.getProperty("browser").equals("ie")) {
 
                 System.setProperty("webdriver.ie.driver",
                         genericDir + "\\src\\test\\resources\\executables\\IEDriverServer.exe");
                 driver = new InternetExplorerDriver();
-
+                log.debug("Initialize IE driver");
             }
-
+            log.debug("Open browser");
             driver.get(config.getProperty("urlsite"));
+            log.debug("Navigate to " + config.getProperty("urlsite"));
             driver.manage().window().maximize();
             driver.manage().timeouts().implicitlyWait(Integer.parseInt(config.getProperty("implicit.wait")), TimeUnit.SECONDS);
 
@@ -98,7 +104,7 @@ public class TestBase {
         if (driver != null) {
             driver.quit();
         }
-
+        log.debug("Test execution completed");
 
     }
 

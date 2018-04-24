@@ -2,3 +2,5 @@
 .idea/
 target/
 DataDrivenFramework.iml
+src/test/resources/logs/
+src/test/resources/executables
